@@ -19,6 +19,20 @@
     ga('send', 'pageview');
 
   </script>    
+  <script>
+    /**
+    * Function that tracks a click on an outbound link in Analytics.
+    * This function takes a valid URL string as an argument, and uses that URL string
+    * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+    * using 'navigator.sendBeacon' in browser that support it.
+    */
+    var trackOutboundLink = function(url) {
+       ga('send', 'event', 'outbound', 'click', url, {
+         'transport': 'beacon',
+         'hitCallback': function(){document.location = url;}
+       });
+    }
+  </script>  
 </head>
 <body>
   <nav class="light-blue darken-1" role="navigation">
@@ -35,7 +49,7 @@
         <h5 class="header col s12 light">Fun photo competitions, with friends.</h5>
         </div>
         <div class="row center">
-        <a href="https://app.photoclash.net" id="download-button" class="btn-large waves-effect waves-light red">Get Started</a>
+        <a href="https://app.photoclash.net" onclick="trackOutboundLink('https://app.photoclash.net'); return false;" id="download-button" class="btn-large waves-effect waves-light red">Get Started</a>
         </div>
         <br><br>
 
